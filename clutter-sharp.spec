@@ -9,7 +9,7 @@
 Summary: C#/.NET bindings to Clutter
 Name: clutter-sharp
 Version: 0
-Release: %mkrel -c %{gitdate} 1
+Release: %mkrel -c %{gitdate} 2
 URL: http://www.clutter-project.org
 Source0: %{name}-%{gitdate}.tar.xz
 Patch0: clutter-sharp-20090817-ilasm-build.patch
