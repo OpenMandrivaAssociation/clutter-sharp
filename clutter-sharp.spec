@@ -9,7 +9,7 @@
 Summary: C#/.NET bindings to Clutter
 Name: clutter-sharp
 Version: 0
-Release: %mkrel -c %{gitdate} 2
+Release: %mkrel -c %{gitdate} 3
 URL: http://www.clutter-project.org
 Source0: %{name}-%{gitdate}.tar.xz
 Patch0: clutter-sharp-20090817-ilasm-build.patch
@@ -21,7 +21,7 @@ BuildRequires: mono-devel
 BuildRequires: gtk-sharp2-devel
 BuildRequires: gtk-sharp2
 BuildRequires: glib-sharp2
-BuildRequires: clutter-gtk-devel 
+BuildRequires: clutter-gtk-devel < 1.0
 ExcludeArch: sparc64
 Requires: %cluttergtklibname
 
