@@ -1,0 +1,11 @@
+--- clutter-sharp/glib/Makefile.am~	2009-08-17 14:33:18.000000000 +0200
++++ clutter-sharp/glib/Makefile.am	2010-12-16 13:09:49.000000000 +0100
+@@ -10,7 +10,7 @@
+ patch-glib: patch.dll
+ 	monodis glib-sharp.dll | awk -v self=$(srcdir)/apply-patch.awk \
+ 		-v mode=1 -f $(srcdir)/apply-patch.awk > glib-sharp.il
+-	ilasm2 /dll /output:glib-sharp.dll glib-sharp.il
++	ilasm /dll /output:glib-sharp.dll glib-sharp.il
+ 	rm glib-sharp.il
+ 
+ patch.dll: patch.cs glib-sharp.dll

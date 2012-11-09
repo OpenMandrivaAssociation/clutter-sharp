@@ -1,0 +1,36 @@
+diff -uNr clutter-sharp-20090828.old/clutter/Clutter/ActorBox.custom clutter-sharp-20090828/clutter/Clutter/ActorBox.custom
+--- clutter-sharp-20090828.old/clutter/Clutter/ActorBox.custom	2009-08-17 14:33:18.000000000 +0200
++++ clutter-sharp-20090828/clutter/Clutter/ActorBox.custom	2010-11-01 01:02:52.000000000 +0100
+@@ -28,10 +28,10 @@
+         
+ public ActorBox (float x, float y, float width, float height)
+ {
+-    X1 = x;
+-    Y1 = y;
+-    Width = width;
+-    Height = height;
++    x1 = x;
++    y1 = y;
++    x2 = x1 + width;
++    y2 = y1 + height;
+ }
+ 
+ public override string ToString ()
+diff -uNr clutter-sharp-20090828.old/clutter/Clutter/Color.custom clutter-sharp-20090828/clutter/Clutter/Color.custom
+--- clutter-sharp-20090828.old/clutter/Clutter/Color.custom	2009-08-17 14:33:18.000000000 +0200
++++ clutter-sharp-20090828/clutter/Clutter/Color.custom	2010-11-01 01:05:42.000000000 +0100
+@@ -24,10 +24,10 @@
+ // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ // THE SOFTWARE.
+ 
+-public byte R { get; set; }
+-public byte G { get; set; }
+-public byte B { get; set; }
+-public byte A { get; set; }
++public byte R;
++public byte G;
++public byte B;
++public byte A;
+ 
+ public Color (byte r, byte g, byte b, byte a)
+ {
