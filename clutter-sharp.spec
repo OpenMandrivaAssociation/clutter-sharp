@@ -5,7 +5,7 @@
 %define cluttergtklibname %mklibname clutter-gtk 1.0 0
 
 #gw it ships a patched version of glib-sharp
-%define _provides_exceptions mono.glib-sharp
+%define __noautoprov mono.glib-sharp
 
 %define gitdate 20090817
 
