@@ -4,30 +4,33 @@
 
 %define cluttergtklibname %mklibname clutter-gtk 1.0 0
 
-#gw it ships a patched version of glib-sharp
-%define __noautoprov mono.glib-sharp
-
 %define gitdate 20090817
 
 Summary:	C#/.NET bindings to Clutter
 Name:		clutter-sharp
 Version:	0
-Release:	%mkrel -c %{gitdate} 4
-URL:		http://www.clutter-project.org
+Release:	0.%{gitdate}.5
+License:	MIT
+Group:		System/Libraries
+Url:		http://www.clutter-project.org
 Source0:	%{name}-%{gitdate}.tar.xz
 Patch0:		clutter-sharp-20090817-ilasm-build.patch
 Patch1:		clutter-sharp-20090828-initialization-fix.patch
-License:	MIT
-Group:		System/Libraries
-BuildRequires:	mono-devel
-BuildRequires:	gtk-sharp2-devel
 BuildRequires:	gtk-sharp2
 BuildRequires:	glib-sharp2
-BuildRequires:	clutter-gtk-devel
-Requires:	%{cluttergtklibname}
+BuildRequires:	pkgconfig(clutter-gtk-1.0)
+BuildRequires:	pkgconfig(gapi-2.0)
+BuildRequires:	pkgconfig(mono)
+Requires:	%{cluttergtklibname} = %{EVRD}
 
 %description
-Clutter-sharp offers C#/.NET bindings to Clutter
+Clutter-sharp offers C#/.NET bindings to Clutter.
+
+%files
+%doc COPYING README
+%{_libdir}/clutter-sharp/
+
+#----------------------------------------------------------------------------
 
 %package devel
 Summary:	Development files for %{name}
@@ -38,16 +41,35 @@ Requires:	%{name} = %{version}-%{release}
 This package contains the development files for the C#/.NET bindings
 to clutter.
 
+%files devel
+%{_datadir}/gapi-2.0/*
+%{_libdir}/pkgconfig/clutter-sharp.pc
+%{_libdir}/pkgconfig/clutter-gtk-sharp.pc
+
+#----------------------------------------------------------------------------
+
 %package doc
 Summary:	Development documentation for %{name}
 Group:		Development/Other
+Requires(post,postun):	mono-tools >= 1.1.9
 BuildArch:	noarch
-Requires(post):		mono-tools >= 1.1.9
-Requires(postun):	mono-tools >= 1.1.9 
 
 %description doc
-This package contains the API documentation for the %name in
-Monodoc format. 
+This package contains the API documentation for the %{name} in
+Monodoc format.
+
+%files doc
+%{_prefix}/lib/monodoc/sources/*
+
+%post doc
+%{_bindir}/monodoc --make-index > /dev/null
+
+%postun doc
+if [ "$1" = "0" -a -x %{_bindir}/monodoc ]; then
+  %{_bindir}/monodoc --make-index > /dev/null
+fi
+
+#----------------------------------------------------------------------------
 
 %prep
 %setup -q -n %{name}
@@ -71,22 +93,3 @@ make
 %install
 %makeinstall_std
 
-%post doc
-%{_bindir}/monodoc --make-index > /dev/null
-
-%postun doc
-if [ "$1" = "0" -a -x %{_bindir}/monodoc ]; then
-  %{_bindir}/monodoc --make-index > /dev/null
-fi
-
-%files
-%doc COPYING README
-%{_libdir}/clutter-sharp/
-
-%files devel
-%{_datadir}/gapi-2.0/*
-%{_libdir}/pkgconfig/clutter-sharp.pc
-%{_libdir}/pkgconfig/clutter-gtk-sharp.pc
-
-%files doc
-%{_prefix}/lib/monodoc/sources/*
