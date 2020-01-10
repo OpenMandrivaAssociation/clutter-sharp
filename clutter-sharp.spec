@@ -73,7 +73,7 @@ fi
 
 %prep
 %setup -q -n %{name}
-%apply_patches
+%autopatch -p1
 sed -i -e 's!$(prefix)/lib!%{_libdir}/!' glib/Makefile.am
 sed -i -e 's!$(prefix)/lib!%{_libdir}/!' clutter/Makefile.am
 sed -i -e 's!$(prefix)/lib!%{_libdir}/!' build/assembly.mk
