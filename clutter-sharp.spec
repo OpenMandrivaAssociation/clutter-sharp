@@ -12,7 +12,7 @@ Version:	0
 Release:	0.%{gitdate}.5
 License:	MIT
 Group:		System/Libraries
-Url:		http://www.clutter-project.org
+Url:		https://www.clutter-project.org
 Source0:	%{name}-%{gitdate}.tar.xz
 Patch0:		clutter-sharp-20090817-ilasm-build.patch
 Patch1:		clutter-sharp-20090828-initialization-fix.patch
